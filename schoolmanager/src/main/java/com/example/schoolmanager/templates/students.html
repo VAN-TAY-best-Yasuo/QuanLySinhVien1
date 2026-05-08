@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Management</title>
+<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🎓 Student Management</h1>
+        <p>Tổng số sinh viên: <b th:text="${students.size()}"></b></p>
+    </div>
+
+    <div class="top-bar">
+        <form class="search-box" method="get" action="/students">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="🔍 Tìm theo tên">
+            <button type="submit">Tìm</button>
+        </form>
+
+        <a href="/students/add" class="add-btn">➕ Thêm sinh viên</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Tuổi</th>
+                <th>Email</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="sv : ${students}">
+                <td th:text="${sv.id}"></td>
+                <td th:text="${sv.name}"></td>
+                <td th:text="${sv.age}"></td>
+                <td th:text="${sv.email}"></td>
+                <td class="action">
+                    <a th:href="@{/students/edit/{id}(id=${sv.id})}" class="edit">✏️ Sửa</a>
+                    <a th:href="@{/students/delete/{id}(id=${sv.id})}"
+                       class="delete"
+                       onclick="return confirm('Xóa sinh viên này?')">
+                       🗑 Xóa
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

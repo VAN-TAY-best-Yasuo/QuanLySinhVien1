@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Form</title>
+<link rel="stylesheet" th:href="@{/style.css}">
+
+<style>
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+
+    .btn-back {
+        text-decoration: none;
+        background: #6b7280;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: white;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn-save:hover,
+    .btn-back:hover {
+        opacity: 0.9;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" style="max-width: 520px">
+
+    <div class="header">
+        <h1 th:text="${student.id == null ? '➕ Thêm sinh viên' : '✏️ Sửa sinh viên'}"></h1>
+        <p>Nhập đầy đủ thông tin sinh viên</p>
+    </div>
+
+    <!-- FORM -->
+    <form th:action="@{/students/save}" method="post" th:object="${student}">
+
+        <!-- ID ẩn -->
+        <input type="hidden" th:field="*{id}">
+
+        <div style="margin-bottom: 15px">
+            <label>Tên</label>
+            <input type="text" th:field="*{name}" required>
+        </div>
+
+        <div style="margin-bottom: 15px">
+            <label>Tuổi</label>
+            <input type="number" th:field="*{age}" required>
+        </div>
+
+        <div style="margin-bottom: 20px">
+            <label>Email</label>
+            <input type="email" th:field="*{email}" required>
+        </div>
+
+        <!-- NÚT -->
+        <div class="top-bar">
+            <a href="/students" class="btn-back">⬅ Quay lại</a>
+            <button type="submit" class="btn-save">💾 Lưu</button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
