@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ Thống Quản Lý Sinh Viên</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><a href="/students" style="text-decoration: none; color: inherit;">🎓 Hệ Thống Quản Lý</a></h1>
+            <p>Hồ sơ lưu trữ | Tổng số sinh viên: <b th:text="${totalCount}">0</b>
+                <span th:if="${keyword != null and !#strings.isEmpty(keyword)}" style="color: #8b7355; font-size: 14px;"
+                    th:text="'  (Tìm thấy: ' + ${students.size()} + ' kết quả)'"></span>
+            </p>
+        </div>
+
+        <div class="top-bar">
+            <form class="search-box" method="get" action="/students">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tên, email hoặc mã số...">
+                <button type="submit" class="btn-classic btn-search">Truy xuất</button>
+            </form>
+            <a href="/students/add" class="btn-add">＋ Ghi danh mới</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 60px; text-align: center;">STT</th>
+                    <th>Họ và Tên</th>
+                    <th>Tuổi</th>
+                    <th>Email liên hệ</th>
+                    <th style="text-align: center;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sv, iterStat : ${students}">
+                    <td th:text="${iterStat.count}" style="text-align: center; color: #8b7355;"></td>
+                    <td><b th:text="${sv.name}"></b></td>
+                    <td th:text="${sv.age}"></td>
+                    <td th:text="${sv.email}"></td>
+                    <td>
+                        <div class="action-div">
+                            <a th:href="@{/students/edit/{id}(id=${sv.id})}" class="edit">Sửa</a>
+                            <a th:href="@{/students/delete/{id}(id=${sv.id})}" class="delete"
+                                onclick="return confirm('Xác nhận xóa hồ sơ?')">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

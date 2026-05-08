@@ -38,4 +38,13 @@ public class StudentService {
     public List<Student> findByName(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }
+
+    public List<Student> findByEmail(String email) {
+        return repository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(email, email);
+    }
+
+    // Tìm theo tên HOẶC email
+    public List<Student> search(String keyword) {
+        return repository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(keyword, keyword);
+    }
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hồ sơ sinh viên</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <style>
+        .form-box {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border: 1px solid #c9b08f;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #c9b08f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2 th:text="${student.id == null ? '➕ Thêm sinh viên mới' : '✏️ Cập nhật hồ sơ'}"></h2>
+            <form th:action="@{/students/save}" method="post" th:object="${student}">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="input-group">
+                    <label>Họ và Tên</label>
+                    <input type="text" th:field="*{name}" required>
+                </div>
+                <div class="input-group">
+                    <label>Tuổi</label>
+                    <input type="number" th:field="*{age}" required>
+                </div>
+                <div class="input-group">
+                    <label>Email liên hệ</label>
+                    <input type="email" th:field="*{email}" required>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                    <a href="/students" class="btn-classic gray-card" style="text-align: center;">Hủy bỏ</a>
+                    <button type="submit" class="btn-classic btn-add">Lưu hồ sơ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

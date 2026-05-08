@@ -10,16 +10,17 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")   // ✅ FIX: đúng với DB
+    @Column(name = "name") // ✅ FIX: đúng với DB
     private String name;
 
     @Column(name = "age")
-    private Integer age;     // ✅ giữ Integer
+    private Integer age; // ✅ giữ Integer
 
     @Column(name = "email")
     private String email;
 
-    public Student() {}
+    public Student() {
+    }
 
     // ===== Getter & Setter =====
 
